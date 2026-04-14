@@ -1,0 +1,12 @@
+{
+  "cluster": "devnet",
+  "registry": "E9LBRG5eP2kvuNfveouqQ9tA5P6nrpyLyWFjH9MFYVno",
+  "announcer": "HGFn2fH7bVQ5cSuiG52NjzN9m11YrB3FZUfoN9b9A5jf",
+  "groth16Verifier": "6mFaKyp7F4NqNeoiBLEWSqy5wJSk7rWf1EYumVXgHvhQ",
+  "reputationVerifier": "BSnkCDoTpgNVN5BbF3aN5L5EJPiaYUkqqj9MHp8kaqWM",
+  "tokens": {
+    "USDC": "",
+    "USDT": ""
+  },
+  "deployedSlot": 0
+}

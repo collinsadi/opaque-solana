@@ -1,0 +1,32 @@
+[features]
+seeds = false
+skip-lint = false
+
+[programs.localnet]
+stealth_registry = "E9LBRG5eP2kvuNfveouqQ9tA5P6nrpyLyWFjH9MFYVno"
+stealth_announcer = "HGFn2fH7bVQ5cSuiG52NjzN9m11YrB3FZUfoN9b9A5jf"
+groth16_verifier = "6mFaKyp7F4NqNeoiBLEWSqy5wJSk7rWf1EYumVXgHvhQ"
+reputation_verifier = "BSnkCDoTpgNVN5BbF3aN5L5EJPiaYUkqqj9MHp8kaqWM"
+
+[programs.devnet]
+stealth_registry = "E9LBRG5eP2kvuNfveouqQ9tA5P6nrpyLyWFjH9MFYVno"
+stealth_announcer = "HGFn2fH7bVQ5cSuiG52NjzN9m11YrB3FZUfoN9b9A5jf"
+groth16_verifier = "6mFaKyp7F4NqNeoiBLEWSqy5wJSk7rWf1EYumVXgHvhQ"
+reputation_verifier = "BSnkCDoTpgNVN5BbF3aN5L5EJPiaYUkqqj9MHp8kaqWM"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "npx ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[test]
+startup_wait = 5000
+shutdown_wait = 2000
+
+[test.validator]
+url = "https://api.devnet.solana.com"
