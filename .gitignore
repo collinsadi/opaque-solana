@@ -1,1 +1,11 @@
 pot16_final.ptau
+
+# OS/editor noise
+.DS_Store
+
+# Rust/Cargo build outputs
+target/**
+
+# Keep Anchor deploy keypairs versioned to preserve program IDs across machines
+!target/deploy/
+!target/deploy/*-keypair.json
