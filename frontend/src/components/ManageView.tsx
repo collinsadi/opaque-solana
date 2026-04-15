@@ -60,33 +60,9 @@ function shortHex(hex: string): string {
   return `${clean.slice(0, 10)}…${clean.slice(-6)}`;
 }
 
-function slotLabel(slot: bigint, currentSlot: bigint): string {
-  if (slot === 0n) return "Never";
-  if (slot <= currentSlot) return `Slot ${slot.toLocaleString()} (past)`;
-  const diff = slot - currentSlot;
-  const approxSec = Number(diff) * 0.4;
-  if (approxSec < 60) return `~${Math.round(approxSec)}s`;
-  if (approxSec < 3600) return `~${Math.round(approxSec / 60)}m`;
-  return `~${Math.round(approxSec / 3600)}h`;
-}
-
 // =============================================================================
 // Sub-components
 // =============================================================================
-
-function SectionHeader({ title, count, action }: { title: string; count: number; action?: React.ReactNode }) {
-  return (
-    <div className="flex items-center justify-between gap-4 mb-4">
-      <div className="flex items-center gap-2">
-        <h2 className="text-base font-semibold text-white">{title}</h2>
-        <span className="rounded-full bg-ink-800 border border-ink-700 px-2 py-0.5 text-xs text-mist">
-          {count}
-        </span>
-      </div>
-      {action}
-    </div>
-  );
-}
 
 function StatusBadge({ label, variant }: { label: string; variant: "green" | "red" | "yellow" | "gray" }) {
   const cls = {
@@ -357,7 +333,6 @@ export function ManageView({ onNavigate }: ManageViewProps = {}) {
 
   const [attestations, setAttestations] = useState<ManagedAttestation[]>([]);
   const [loading, setLoading] = useState(false);
-  const [currentSlot, setCurrentSlot] = useState(0n);
   const [toast, setToast] = useState<{ msg: string; isError: boolean } | null>(null);
   const [section, setSection] = useState<"schemas" | "attestations">("schemas");
 
@@ -366,12 +341,6 @@ export function ManageView({ onNavigate }: ManageViewProps = {}) {
     if (!walletAddress) return [];
     return Object.values(schemaMap).filter((s) => s.authority === walletAddress);
   }, [schemaMap, walletAddress]);
-
-  const schemaByHex = useMemo(() => {
-    const map = new Map<string, SchemaV2>();
-    for (const s of Object.values(schemaMap)) map.set(s.schemaId.replace(/^0x/, "").toLowerCase(), s);
-    return map;
-  }, [schemaMap]);
 
   const showToast = useCallback((msg: string, isError = false) => {
     setToast({ msg, isError });
@@ -387,8 +356,6 @@ export function ManageView({ onNavigate }: ManageViewProps = {}) {
         fetchAllSchemas(connection),
         fetchAllAttestations(connection),
       ]);
-
-      setCurrentSlot(BigInt(slot));
 
       setSchemas(schemaRows.map(({ address, schema: s }) => ({
         address: address.toBase58(),
