@@ -1,5 +1,23 @@
 # OS/editor noise
 .DS_Store
+.idea/
+
+# Local Solana / Anchor validator state
+test-ledger/
+
+# Anchor local cache (when present)
+.anchor/
+
+# Secrets at repo root (do not use `.env*` — would ignore `.env.example`)
+.env
+.env.local
+.env.*.local
+
+# Circom Powers of Tau at workspace root (large; fetch via script or docs)
+*.ptau
+
+# Logs
+*.log
 
 # Rust/Cargo build outputs
 target/**
@@ -10,3 +28,4 @@ target/**
 
 v2.md
 guide.md
+I.md
